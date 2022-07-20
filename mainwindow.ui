@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>964</width>
-    <height>780</height>
+    <width>800</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -94,6 +94,9 @@
           <widget class="QSplitter" name="splitter">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="handleWidth">
+            <number>5</number>
            </property>
            <widget class="QFrame" name="frame_3">
             <property name="frameShape">
@@ -345,7 +348,9 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QWidget" name="plotSubSatellitePoint" native="true"/>
+                    <widget class="QWidget" name="plotSubSatellitePoint" native="true">
+                     <layout class="QVBoxLayout" name="plotSubSatellitePointLayout"/>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -369,8 +374,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>964</width>
-     <height>23</height>
+     <width>800</width>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
