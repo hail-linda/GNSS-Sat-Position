@@ -1,10 +1,8 @@
 dist/*
 打包文件/*
-
 .ipynb_checkpoints/*
 __pycache__/*
-
 build/*
-
 参考/*
 SatPosition.spec
+*.dll
