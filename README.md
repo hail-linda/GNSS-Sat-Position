@@ -2,6 +2,8 @@
 
 
 
+![pic](./readmePic/pic.png)
+
 ## 开源项目引用声明
 
 https://github.com/medicinely/GNSS-SPP-positioning-practice
