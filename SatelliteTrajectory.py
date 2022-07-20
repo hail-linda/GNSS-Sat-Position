@@ -148,6 +148,8 @@ class SatelliteTrajectory(QWidget):
         # ax = self.fig.subplots()
         print(self.fig)
         ax = plt.axes(projection='3d')
+        # ax.rcParams['figure.figsize'] = (12.0, 8.0)
+        # ax.figure(figsize=(6.4,4.8),dpi=200)
         GPS_n_pos_raw_part = self.GPS_row[:]
         for n in range(len(GPS)):
             x = [item[0] for item in GPS_n_pos_raw_part[n]]

@@ -1,5 +1,6 @@
 
 import math
+import numpy as np
 
 # WGS84 ellipsoid Earth parameters
 WGS84_A = 6378137.0
@@ -25,8 +26,8 @@ _wgs84_e2_a = WGS84_ECC_SQ * WGS84_A
 def llh2ecef(llh):
     """Converts from WGS84 lat/lon/height to ellipsoid-earth ECEF"""
 
-    lat = llh[0] * constants.DTOR
-    lng = llh[1] * constants.DTOR
+    lat = llh[0] * DTOR
+    lng = llh[1] * DTOR
     alt = llh[2]
 
     slat = math.sin(lat)
@@ -67,10 +68,10 @@ def greatcircle(p0, p1):
     _assuming spherical earth_ and _ignoring altitude_. Don't use this if you
     need a distance accurate to better than 1%."""
 
-    lat0 = p0[0] * constants.DTOR
-    lon0 = p0[1] * constants.DTOR
-    lat1 = p1[0] * constants.DTOR
-    lon1 = p1[1] * constants.DTOR
+    lat0 = p0[0] * DTOR
+    lon0 = p0[1] * DTOR
+    lat1 = p1[0] * DTOR
+    lon1 = p1[1] * DTOR
     return SPHERICAL_R * math.acos(
         math.sin(lat0) * math.sin(lat1) +
         math.cos(lat0) * math.cos(lat1) * math.cos(abs(lon0 - lon1)))
@@ -81,3 +82,26 @@ def greatcircle(p0, p1):
 def ecef_distance(p0, p1):
     """Returns the straight-line distance in metres between two ECEF points."""
     return math.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2 + (p0[2] - p1[2])**2)
+
+def ECEF2ENU(x, y, z, x_0, y_0, z_0):
+	lamda = np.arctan(y_0/x_0) 
+	first_matrix = np.matrix([[x - x_0,y - y_0,z - z_0]])
+	r = math.sqrt(math.pow(x, 2.0) + math.pow(y, 2.0) + math.pow(z, 2.0))
+	phi = np.arcsin(z/r)
+	cos_lamda = math.cos(lamda)
+	sin_lamda = math.sin(lamda)
+	cos_phi = math.cos(phi)
+	sin_phi = math.sin(phi)	
+	second_matrix = np.matrix([[-sin_lamda, cos_lamda, 0], 
+			[-sin_phi*cos_lamda, -sin_phi*sin_lamda, cos_phi],
+			[cos_phi * cos_lamda, cos_phi * sin_lamda, sin_phi ]])
+
+	enu = first_matrix.dot(second_matrix)
+	enu = (enu[0,0],enu[0,1],enu[0,2])
+	return enu
+
+def ENU2EA(enu):
+    (e,n,u) = enu
+    E = math.acos(math.sqrt((n**2+e**2)/(n**2+e**2+u**2)))
+    A = math.atan(e/n)
+    return (E * RTOD,A * RTOD)
