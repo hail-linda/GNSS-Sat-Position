@@ -105,3 +105,51 @@ def ENU2EA(enu):
     E = math.acos(math.sqrt((n**2+e**2)/(n**2+e**2+u**2)))
     A = math.atan(e/n)
     return (E * RTOD,A * RTOD)
+
+
+def dop(XYZ_satGroup, XYZ_obs):
+
+    x,  y,  z  = XYZ_obs[0], XYZ_obs[1], XYZ_obs[2]
+
+    # measurement residual equations
+    vector_list = []
+    for sat in XYZ_satGroup:
+        xsat, ysat, zsat = sat[0], sat[1], sat[2]
+        R = math.sqrt(pow(xsat-x,2) + pow(ysat-y,2) + pow(zsat-z,2))
+        i = -((xsat-x)/R)
+        j = -((ysat-y)/R)
+        k = -((zsat-z)/R)
+        l = 1
+
+        vector = [i,j,k,l]
+        vector_list.append(vector)
+
+    A = np.array(vector_list)
+
+    # AT = transpose of A
+    AT = A.transpose()
+
+    # AT*A (AT is 4x4 matrix, A is 4x4 matrix, result is 4x4)
+    ATA = [[0,0,0,0],
+           [0,0,0,0],
+           [0,0,0,0],
+           [0,0,0,0]]
+
+    # iterate through rows of AT
+    for i in range(len(AT)):
+       # iterate through columns of A
+       for j in range(len(A[0])):
+           # iterate through rows of A
+           for k in range(len(A)):
+               ATA[i][j] += AT[i][k] * A[k][j]
+
+    # Q = (AT * A)^-1
+    Q = np.linalg.inv(ATA)
+
+    PDOP = math.sqrt(Q[0][0] + Q[1][1] + Q[2][2])
+    TDOP = math.sqrt(Q[3][3])
+    GDOP = math.sqrt(pow(PDOP,2) + pow(TDOP,2))
+    HDOP = math.sqrt(Q[0][0] + Q[1][1])
+    VDOP = math.sqrt(Q[2][2])
+
+    return GDOP, PDOP, TDOP, HDOP, VDOP
