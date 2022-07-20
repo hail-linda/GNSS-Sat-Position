@@ -23,7 +23,7 @@
    <property name="layoutDirection">
     <enum>Qt::LeftToRight</enum>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,3">
+   <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,7">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>

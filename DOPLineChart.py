@@ -40,7 +40,7 @@ class DOPLineChart(QWidget):
         
 
     def initUI(self):
-        self.fig,ax = plt.subplots(1,1,figsize=(12,6))                                           #创建figure对象
+        self.fig= plt.figure(figsize=(12,6))                                           #创建figure对象
         self.canvas=FigureCanvas(self.fig)                              #创建figure画布
         self.figtoolbar=NavigationToolbar(self.canvas, self)     #创建figure工具栏
        
@@ -59,7 +59,8 @@ class DOPLineChart(QWidget):
         #1的时候1到16，5的时候只显示几个
         # fig, ax 
         # plt.figure(figsize=(6,8))
-        ax.plot(self.tList, self.GDOPList, "g", marker='D', markersize=5, label="周活")
+        plt.plot(self.tList, self.GDOPList, "g", marker='D', markersize=5)
+        ax=plt.gca()
         ax.set_xlabel("Date Time")
         ax.set_ylabel("DOP")
         plt.xticks(rotation=-20)   # 设置横坐标显示的角度，角度是逆时针，自己看

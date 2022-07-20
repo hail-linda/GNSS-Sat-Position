@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PyQt5.QtWidgets import  QMainWindow, QMenuBar, QMenu
 from PyQt5.QtCore import QFile, QIODevice,QSize
 from PyQt5 import uic
-from qt_material import apply_stylesheet
+from qt_material import apply_stylesheet,QtStyleTools
 # create the application and the main window
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
@@ -43,6 +43,7 @@ class MyMainForm(QMainWindow):
         print("self.initUI()")
         desktop = QApplication.desktop()
         rect = desktop.frameSize()
+        # self.add_menu_theme(self.ui, self.ui.menuStyles)
         self.ui.resize(QSize(rect.width(), rect.height()))
         # self.setupUi(self)
         # self.initZenithTrajectoryRawData()
@@ -82,9 +83,33 @@ class MyMainForm(QMainWindow):
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    apply_stylesheet(app, theme='light_cyan.xml')
+    apply_stylesheet(app, theme='dark_teal.xml')
     myWin = MyMainForm()
     myWin.ui.show()
     sys.exit(app.exec())
 
 
+'''
+
+
+
+['dark_amber.xml',
+ 'dark_blue.xml',
+ 'dark_cyan.xml',
+ 'dark_lightgreen.xml',
+ 'dark_pink.xml',
+ 'dark_purple.xml',
+ 'dark_red.xml',
+ 'dark_teal.xml',
+ 'dark_yellow.xml',
+ 'light_amber.xml',
+ 'light_blue.xml',
+ 'light_cyan.xml',
+ 'light_cyan_500.xml',
+ 'light_lightgreen.xml',
+ 'light_pink.xml',
+ 'light_purple.xml',
+ 'light_red.xml',
+ 'light_teal.xml',
+ 'light_yellow.xml']
+'''
