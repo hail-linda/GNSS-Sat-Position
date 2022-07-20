@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>603</height>
+    <width>946</width>
+    <height>720</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -300,7 +300,9 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QWidget" name="plotDOP" native="true"/>
+                    <widget class="QWidget" name="plotDOP" native="true">
+                     <layout class="QVBoxLayout" name="plotDOPLineChartLayout"/>
+                    </widget>
                    </item>
                   </layout>
                  </item>
@@ -374,8 +376,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>22</height>
+     <width>946</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">

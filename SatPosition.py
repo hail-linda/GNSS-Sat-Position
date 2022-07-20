@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 
 from SatelliteTrajectory import SatelliteTrajectory 
 from SubSatellitePoint import SubSatellitePoint
+from ZenithTrajectory import ZenithTrajectory
+from DOPLineChart import DOPLineChart
 
 import georinex as gr
 import time
@@ -48,7 +50,7 @@ class MyMainForm(QMainWindow):
    
    
         # self.ui.btnOpenEphemerisFile.clicked.connect(self.cao("btnOpenEphemerisFile"))
-        # self.ui.resize(800, 500)
+        self.ui.resize(1920, 1080)
 
 
     def initUI(self):
@@ -69,13 +71,18 @@ class MyMainForm(QMainWindow):
     def initPlotZenithTrajectory(self):
         subSatellitePoint = SubSatellitePoint()
         satelliteTrajectory = SatelliteTrajectory()
+        zenithTrajectory = ZenithTrajectory()
+        dOPLineChart = DOPLineChart()
+        
         self.ui.plotSubSatellitePointLayout.addWidget(subSatellitePoint)
         self.ui.plotSatelliteTrajectoryLayout.addWidget(satelliteTrajectory)
+        self.ui.plotZenithTrajectoryLayout.addWidget(zenithTrajectory)
+        self.ui.plotDOPLineChartLayout.addWidget(dOPLineChart)
         
         
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    apply_stylesheet(app, theme='dark_teal.xml')
+    apply_stylesheet(app, theme='light_cyan.xml')
     myWin = MyMainForm()
     myWin.ui.show()
     sys.exit(app.exec())
