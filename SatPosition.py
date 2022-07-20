@@ -5,7 +5,7 @@ import sys
 # from PySide6.QtCore import QFile, QIODevice
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout
 from PyQt5.QtWidgets import  QMainWindow, QMenuBar, QMenu
-from PyQt5.QtCore import QFile, QIODevice
+from PyQt5.QtCore import QFile, QIODevice,QSize
 from PyQt5 import uic
 from qt_material import apply_stylesheet
 # create the application and the main window
@@ -13,6 +13,7 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 
 from SatelliteTrajectory import SatelliteTrajectory 
+from SubSatellitePoint import SubSatellitePoint
 
 import georinex as gr
 import time
@@ -38,13 +39,17 @@ class MyMainForm(QMainWindow):
         super(MyMainForm, self).__init__(parent)
         self.initUI()
         print("self.initUI()")
+        desktop = QApplication.desktop()
+        rect = desktop.frameSize()
+        self.ui.resize(QSize(rect.width(), rect.height()))
         # self.setupUi(self)
         # self.initZenithTrajectoryRawData()
         self.initPlotZenithTrajectory()
    
    
         # self.ui.btnOpenEphemerisFile.clicked.connect(self.cao("btnOpenEphemerisFile"))
-        self.ui.resize(800, 500)
+        # self.ui.resize(800, 500)
+
 
     def initUI(self):
         ui_file_name = "mainwindow.ui"
@@ -62,10 +67,10 @@ class MyMainForm(QMainWindow):
         
 
     def initPlotZenithTrajectory(self):
-        satelliteTrajectory1 = SatelliteTrajectory()
-        satelliteTrajectory2 = SatelliteTrajectory()
-        self.ui.plotZenithTrajectoryLayout.addWidget(satelliteTrajectory1)
-        self.ui.plotSatelliteTrajectoryLayout.addWidget(satelliteTrajectory2)
+        subSatellitePoint = SubSatellitePoint()
+        satelliteTrajectory = SatelliteTrajectory()
+        self.ui.plotSubSatellitePointLayout.addWidget(subSatellitePoint)
+        self.ui.plotSatelliteTrajectoryLayout.addWidget(satelliteTrajectory)
         
         
 if __name__ == "__main__":
